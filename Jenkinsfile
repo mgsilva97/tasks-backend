@@ -1,10 +1,10 @@
 pipeline {
     agent any
         stages  {
-            stage ('Just Testing Jenkins File') {
+            stage ('Build do Backend') {
                 steps {
-                    bat ('echo DEU CERTO, BROW!')
+                    bat 'mvn clean package -DskipTests=true'
                     }
-                   }
+                }
             }
 }
