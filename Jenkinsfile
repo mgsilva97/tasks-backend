@@ -54,14 +54,15 @@ pipeline {
                     } 
                 }
 
-                stage('Deploy FrontEnd') {
+                stage('Deploy Frontend') {
                     steps {
                         dir('frontend') {
                         git credentialsId: 'TomcatLogin', url: 'https://github.com/mgsilva97/tasks-frontend'
                         bat 'mvn clean package -DskipTests=true'
                         deploy adapters: [tomcat8(credentialsId: 'TomcatLogin', path: '', url: 'http://ayrtonsenna.it:8001/')], contextPath: 'tasks', war: 'target/tasks.war'
+        
                     } 
                 }
-                }
+            }
     }
 }
