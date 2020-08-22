@@ -27,8 +27,8 @@ pipeline {
         }
                 stage ("Quality Gate") { 
                     steps {
-                            script {
-                        sleep(10)
+                      script {
+                        sleep(300)
                         timeout(time: 1, unit: 'MINUTES') {
                         waitForQualityGate(abortPipeline: true, credentialsId: '081e7772735bbbeed002eebc846dd177a04a5e5a') 
                              def qg = waitForQualityGate()
