@@ -40,12 +40,18 @@ pipeline {
                 }               
             }
         }
-
-                stage('Deploy Backend') {
+                  stage('Deploy Backend') {
                     steps {
                         deploy adapters: [tomcat8(credentialsId: 'TomcatLogin', path: '', url: 'http://ayrtonsenna.it:8001/')], contextPath: 'tasks-backend', war: 'target/tasks-backend.war'
-                    }
-                    
-                }
+                    } 
+                            }
+                             stage('API Tests') {
+                    dir('api-test') {
+                    steps {
+                        git credentialsId: 'TomcatLogin', url: 'https://github.com/mgsilva97/tasks-api-test'
+                        bat 'mvn test'
+                        }
+                    } 
+                            }
     }
 }
