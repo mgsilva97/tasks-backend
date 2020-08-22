@@ -27,15 +27,17 @@ pipeline {
         }
                 stage ("Quality Gate") { 
                     steps {
+                            script {
                         sleep(10)
                         timeout(time: 1, unit: 'MINUTES') {
-                        waitForQualityGate abortPipeline: true //, credentialsId: '74d8d65125e831294764579d17572b4cccacf554') 
-                            // def qg = waitForQualityGate()
-                            // if (qg.status != 'OK') {
-                            // error "Pipeline abort due to quality gate failure ${qg.status}"
-                       // }
+                        waitForQualityGate(abortPipeline: true, credentialsId: '8d3bce96b9052902a0ad18e85dcf8ece9f45b789') 
+                             def qg = waitForQualityGate()
+                             if (qg.status != 'OK') {
+                             error "Pipeline abort due to quality gate failure ${qg.status}"
+                        }
                     }
                 }               
             }
+        }
     }
 }
