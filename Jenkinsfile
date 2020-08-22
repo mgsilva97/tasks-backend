@@ -45,6 +45,7 @@ pipeline {
                         deploy adapters: [tomcat8(credentialsId: 'TomcatLogin', path: '', url: 'http://ayrtonsenna.it:8001/')], contextPath: 'tasks-backend', war: 'target/tasks-backend.war'
                     } 
                             }
+
                   stage('API Tests') {
                       steps {
                         dir('api-test') {
@@ -64,5 +65,14 @@ pipeline {
                     } 
                 }
             }
+
+            stage('Functional Tests') {
+                      steps {
+                        dir('tasks-functional-tests') {
+                            git credentialsId: 'TomcatLogin', url: 'https://github.com/mgsilva97/tasks-functional-tests'
+                            bat 'mvn test'
+                        }
+                    } 
+                }
     }
 }
