@@ -21,7 +21,7 @@ pipeline {
                 steps {
                     withSonarQubeEnv('SONAR_REMOTE') {
                     //bat "${scannerHome}/bin/sonar-scanner -e -Dsonar.projectKey=DeployBack -Dsonar.host.url=http://192.168.1.28:9000 -Dsonar.login=74d8d65125e831294764579d17572b4cccacf554 -Dsonar.java.binaries=target -Dsonar.coverage.exclusions=**/.mvn/**,**/src/test/**,**/model/**,**Application.Java"
-                      bat "${scannerHome}/bin/sonar-scanner -e -Dsonar.projectKey=DeployBack -Dsonar.host.url=http://192.168.1.28:9000 -Dsonar.login=8d3bce96b9052902a0ad18e85dcf8ece9f45b789 -Dsonar.java.binaries=target -Dsonar.coverage.exclusions=**/.mvn/**,**/src/test/**,**/model/**,**Application.Java"
+                      bat "${scannerHome}/bin/sonar-scanner -e -Dsonar.projectKey=DeployBack -Dsonar.host.url=http://192.168.1.28:9000 -Dsonar.login=081e7772735bbbeed002eebc846dd177a04a5e5a -Dsonar.java.binaries=target -Dsonar.coverage.exclusions=**/.mvn/**,**/src/test/**,**/model/**,**Application.Java"
                 }
             }
         }
@@ -30,7 +30,7 @@ pipeline {
                             script {
                         sleep(10)
                         timeout(time: 1, unit: 'MINUTES') {
-                        waitForQualityGate(abortPipeline: true, credentialsId: '8d3bce96b9052902a0ad18e85dcf8ece9f45b789') 
+                        waitForQualityGate(abortPipeline: true, credentialsId: '081e7772735bbbeed002eebc846dd177a04a5e5a') 
                              def qg = waitForQualityGate()
                              if (qg.status != 'OK') {
                              error "Pipeline abort due to quality gate failure ${qg.status}"
